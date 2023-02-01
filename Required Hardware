@@ -1,0 +1,18 @@
+# Required Hardwares: 
+- 1x Arduino UNO R3
+- 2x NRF24L01+
+- 2x NRF24L01+ Adapter
+- 5x Flex Sensor
+- 5x MG90S Servo
+- 5x Steel Springs
+- 1x Gloves
+- 3 in 1 Jumper Wire
+- Breadboard
+- Foam Board
+- Nylon Strings
+- Glue Gun
+- Cable Ties
+- Arduino Compatible SCM & DIY Kits
+
+# Library: 
+- RF24 Library
