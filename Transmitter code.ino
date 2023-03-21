@@ -1,51 +1,62 @@
-// Includes the Servo library
-#include <Servo.h>. 
-// Defines Tirg and Echo pins of the Ultrasonic Sensor
-const int trigPin = 10;
-const int echoPin = 11;
-// Variables for the duration and the distance
-long duration;
-int distance;
-Servo myServo; // Creates a servo object for controlling the servo motor
-void setup() {
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+#include <SPI.h>                      //the communication interface with the modem
+#include "RF24.h"                     //the library which helps us to control the radio modem
+
+int msg[1];
+
+//define the flex sensor input pins
+int flex_5 = A5;
+int flex_4 = A4;
+int flex_3 = A3;
+int flex_2 = A2;
+int flex_1 = A1;
+
+//define variables for flex sensor values
+int flex_5_val;
+int flex_4_val;
+int flex_3_val;
+int flex_2_val;
+int flex_1_val;
+
+RF24 radio(5,10);                     //5 and 10 are a digital pin numbers to which signals CE and CSN are connected.
+                                      
+const uint64_t pipe = 0xE8E8F0F0E1LL; //the address of the modem, that will receive data from Arduino.
+
+
+void setup(void){
   Serial.begin(9600);
-  myServo.attach(12); // Defines on which pin is the servo motor attached
+  radio.begin();                      //it activates the modem.
+  radio.openWritingPipe(pipe);        //sets the address of the receiver to which the program will send data.
 }
-void loop() {
-  // rotates the servo motor from 15 to 165 degrees
-  for(int i=15;i<=165;i++){  
-  myServo.write(i);
-  delay(30);
-  distance = calculateDistance();// Calls a function for calculating the distance measured by the Ultrasonic sensor for each degree
-  
-  Serial.print(i); // Sends the current degree into the Serial Port
-  Serial.print(","); // Sends addition character right next to the previous value needed later in the Processing IDE for indexing
-  Serial.print(distance); // Sends the distance value into the Serial Port
-  Serial.print("."); // Sends addition character right next to the previous value needed later in the Processing IDE for indexing
-  }
-  // Repeats the previous lines from 165 to 15 degrees
-  for(int i=165;i>15;i--){  
-  myServo.write(i);
-  delay(30);
-  distance = calculateDistance();
-  Serial.print(i);
-  Serial.print(",");
-  Serial.print(distance);
-  Serial.print(".");
-  }
-}
-// Function for calculating the distance measured by the Ultrasonic sensor
-int calculateDistance(){ 
-  
-  digitalWrite(trigPin, LOW); 
-  delayMicroseconds(2);
-  // Sets the trigPin on HIGH state for 10 micro seconds
-  digitalWrite(trigPin, HIGH); 
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin, HIGH); // Reads the echoPin, returns the sound wave travel time in microseconds
-  distance= duration*0.034/2;
-  return distance;
+
+void loop(){
+
+  flex_5_val = analogRead(flex_5); 
+                             //175 - 0
+  flex_5_val = map(flex_5_val, 1023, 0, 0, 10);
+  msg[0] = flex_5_val;
+  radio.write(msg, 1);
+
+  flex_4_val = analogRead(flex_4);
+                             //175 - 0
+  flex_4_val = map(flex_4_val, 1023, 0, 11, 20);
+  msg[0] = flex_4_val;
+  radio.write(msg, 1);
+
+  flex_3_val = analogRead(flex_3);
+                             //175 - 0
+  flex_3_val = map(flex_3_val, 1023, 0, 21, 30);
+  msg[0] = flex_3_val;
+  radio.write(msg, 1);
+
+  flex_2_val = analogRead(flex_2);
+                             //175 - 0
+  flex_2_val = map(flex_2_val, 1023, 0, 31, 40);
+  msg[0] = flex_2_val;
+  radio.write(msg, 1);
+
+  flex_1_val = analogRead(flex_1);
+                             //175 - 0
+  flex_1_val = map(flex_1_val, 1023, 0, 41, 50);
+  msg[0] = flex_1_val;
+  radio.write(msg, 1);
 }
