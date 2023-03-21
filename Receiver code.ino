@@ -1,51 +1,64 @@
-// Includes the Servo library
-#include <Servo.h>. 
-// Defines Tirg and Echo pins of the Ultrasonic Sensor
-const int trigPin = 10;
-const int echoPin = 11;
-// Variables for the duration and the distance
-long duration;
-int distance;
-Servo myServo; // Creates a servo object for controlling the servo motor
-void setup() {
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
-  Serial.begin(9600);
-  myServo.attach(12); // Defines on which pin is the servo motor attached
-}
-void loop() {
-  // rotates the servo motor from 15 to 165 degrees
-  for(int i=15;i<=165;i++){  
-  myServo.write(i);
-  delay(30);
-  distance = calculateDistance();// Calls a function for calculating the distance measured by the Ultrasonic sensor for each degree
+#include <Servo.h>    //the library which helps us to control the servo motor
+#include <SPI.h>      //the communication interface with the modem
+#include "RF24.h"     //the library which helps us to control the radio modem
+
+//define the servo name
+Servo myServo1;
+Servo myServo3;
+Servo myServo4;
+Servo myServo2;
+Servo myServo5;
+
+RF24 radio(5,10);     /*This object represents a modem connected to the Arduino. 
+                      Arguments 5 and 10 are a digital pin numbers to which signals 
+                      CE and CSN are connected.*/
+
+const uint64_t pipe = 0xE8E8F0F0E1LL; //the address of the modem,that will receive data from the Arduino.
+
+int msg[1];
+
+int data; //data variable
+int pos; //position variable
+
+void setup(){
+
+  //define the servo input pins
+  myServo1.attach(15); //A1
+  myServo3.attach(16); //A2
+  myServo4.attach(17); //A3
+  myServo2.attach(18); //A4
+  myServo5.attach(19); //A5
   
-  Serial.print(i); // Sends the current degree into the Serial Port
-  Serial.print(","); // Sends addition character right next to the previous value needed later in the Processing IDE for indexing
-  Serial.print(distance); // Sends the distance value into the Serial Port
-  Serial.print("."); // Sends addition character right next to the previous value needed later in the Processing IDE for indexing
+  radio.begin();                    //it activates the modem.
+  radio.openReadingPipe(1, pipe);   //determines the address of our modem which receive data.
+  radio.startListening();           //enable receiving data via modem
   }
-  // Repeats the previous lines from 165 to 15 degrees
-  for(int i=165;i>15;i--){  
-  myServo.write(i);
-  delay(30);
-  distance = calculateDistance();
-  Serial.print(i);
-  Serial.print(",");
-  Serial.print(distance);
-  Serial.print(".");
+
+
+//You don't need to make changes in this section
+void loop(){
+  if(radio.available()){
+    radio.read(msg, 1);
+
+    if(msg[0] <11 && msg[0] >-1){
+      data = msg[0], pos=map(data, 0, 10, 175, 0);
+      myServo1.write(pos); 
+    }
+    if(msg[0] <21 && msg[0]>10){
+      data = msg[0], pos=map(data, 11, 20, 175, 0);
+      myServo3.write(pos);
+    }
+    if(msg[0] <31 && msg[0]>20){
+      data = msg[0], pos=map(data, 21, 30, 175, 0);
+      myServo4.write(pos);
+    }
+    if(msg[0] <41 && msg[0]>30){
+      data = msg[0], pos=map(data, 31, 40, 175, 0);
+      myServo2.write(pos);
+    }
+    if(msg[0] <51 && msg[0]>40){
+      data = msg[0], pos=map(data, 41, 50, 175, 0);
+      myServo5.write(pos);
+    }
   }
-}
-// Function for calculating the distance measured by the Ultrasonic sensor
-int calculateDistance(){ 
-  
-  digitalWrite(trigPin, LOW); 
-  delayMicroseconds(2);
-  // Sets the trigPin on HIGH state for 10 micro seconds
-  digitalWrite(trigPin, HIGH); 
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin, HIGH); // Reads the echoPin, returns the sound wave travel time in microseconds
-  distance= duration*0.034/2;
-  return distance;
 }
