@@ -26,13 +26,13 @@ The following components are required to build the robotic hand:
 
 
 
-Libraries:
+<h3>Libraries</h3>
 
 To enable wireless communication between the transmitter and receiver, the RF24 library is required.
 
 
 
-Implementation:
+<h3>Implementation</h3>
 
 The robotic hand is designed to mimic the movements of a human hand based on the readings from flex sensors. Five flex sensors are used to detect the 
 bending of fingers, and five MG90S servos are used for actuation. The servos are attached to the fingers of the glove, and steel springs are used to provide 
