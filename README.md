@@ -1,4 +1,4 @@
-Robotic Hand with Flex Sensor Readings and Wireless Communication:
+##Robotic Hand with Flex Sensor Readings and Wireless Communication:
 
 This project involves designing and constructing a robotic hand that can be controlled wirelessly using flex sensors and nRF24L01 transceivers. 
 The system is programmed and controlled using an Arduino UNO microcontroller.
