@@ -6,20 +6,20 @@ The system is programmed and controlled using an Arduino UNO microcontroller.
 Hardware Requirements
 The following components are required to build the robotic hand:
 
-1x Arduino UNO R3
-2x NRF24L01+ transceivers
-2x NRF24L01+ adapters
-5x flex sensors
-5x MG90S servos
-5x steel springs
-1x pair of gloves
-3-in-1 jumper wires
-Breadboard
-Foam board
-Nylon strings
-Glue gun
-Cable ties
-Arduino compatible SCM & DIY kits
+|| 1x Arduino UNO R3
+|| 2x NRF24L01+ transceivers
+|| 2x NRF24L01+ adapters
+|| 5x flex sensors
+|| 5x MG90S servos
+|| 5x steel springs
+|| 1x pair of gloves
+|| 3-in-1 jumper wires
+|| Breadboard
+|| Foam board
+|| Nylon strings
+|| Glue gun
+|| Cable ties
+|| Arduino compatible SCM & DIY kits
 
 
 Libraries
