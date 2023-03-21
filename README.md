@@ -5,7 +5,7 @@ The system is programmed and controlled using an Arduino UNO microcontroller.
 
 
 
-Hardware Requirements:
+<h3>Hardware Requirements:</h3>
 
 The following components are required to build the robotic hand:
 
