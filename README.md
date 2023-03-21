@@ -4,6 +4,7 @@ This project involves designing and constructing a robotic hand that can be cont
 The system is programmed and controlled using an Arduino UNO microcontroller.
 
 
+
 Hardware Requirements:
 
 The following components are required to build the robotic hand:
@@ -24,9 +25,11 @@ The following components are required to build the robotic hand:
 || Arduino compatible SCM & DIY kits
 
 
+
 Libraries:
 
 To enable wireless communication between the transmitter and receiver, the RF24 library is required.
+
 
 
 Implementation:
