@@ -9,7 +9,7 @@ Hardware Requirements:
 
 The following components are required to build the robotic hand:
 
-|| 1x Arduino UNO R3
+1x Arduino UNO R3
 || 2x NRF24L01+ transceivers
 || 2x NRF24L01+ adapters
 || 5x flex sensors
