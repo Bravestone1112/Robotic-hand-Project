@@ -1,9 +1,11 @@
-Robotic Hand with Flex Sensor Readings and Wireless Communication: 
+Robotic Hand with Flex Sensor Readings and Wireless Communication:
+
 This project involves designing and constructing a robotic hand that can be controlled wirelessly using flex sensors and nRF24L01 transceivers. 
 The system is programmed and controlled using an Arduino UNO microcontroller.
 
 
-Hardware Requirements
+Hardware Requirements:
+
 The following components are required to build the robotic hand:
 
 || 1x Arduino UNO R3
@@ -22,11 +24,13 @@ The following components are required to build the robotic hand:
 || Arduino compatible SCM & DIY kits
 
 
-Libraries
+Libraries:
+
 To enable wireless communication between the transmitter and receiver, the RF24 library is required.
 
 
-Implementation
+Implementation:
+
 The robotic hand is designed to mimic the movements of a human hand based on the readings from flex sensors. Five flex sensors are used to detect the 
 bending of fingers, and five MG90S servos are used for actuation. The servos are attached to the fingers of the glove, and steel springs are used to provide 
 resistance and bring the fingers back to their initial positions.
